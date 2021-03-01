@@ -1,0 +1,41 @@
+---
+- name: Install Webserver
+  hosts: all
+  tasks:
+  - name: Install Repository epel-release
+    yum:
+      name: epel-release.noarch
+      state: latest
+
+  - name: Install Repository yum-utils
+    yum:
+      name: yum-utils
+      state: latest
+
+  - name: Install Repository epel7
+    yum:
+      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: latest
+
+  - name: Install Repository remi7
+    yum:
+      name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+      state: latest
+
+  - name: Patching RHEL
+    yum:
+      name: "*"
+      state: latest
+
+  - name: Enable Repository PHP 7.4
+    shell: yum-config-manager --enable remi-php74
+
+  - name: Install PHP 7.4
+    yum:
+      name: php, php-mcrypt, php-cli, php-gd, php-curl, php-mysql, php-ldap, php-zip, php-fileinfo, php-xml, php-soap, php-xmlrpc, php-mbstring, php-json, php-gd, php-mcrypt
+      state: latest
+
+  - name: Install HTTPD Mariadb-server Memchaced CIFS-Utils etc
+    yum:
+      name: wget, links, httpd, mariadb-server, memcached, cifs-utils, nano
+      state: latest
