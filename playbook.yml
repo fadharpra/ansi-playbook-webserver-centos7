@@ -30,10 +30,9 @@
   - name: Enable Repository PHP 7.4
     shell: yum-config-manager --enable remi-php74
 
-
   - name: Install PHP 7.4
     yum:
-      name: php, php-mcrypt, php-cli, php-gd, php-curl, php-mysql, php-ldap, php-zip, php-fileinfo, php-xml, php-soap, php-xmlrpc, php-mbstring, php-json, ph$
+      name: php, php-mcrypt, php-cli, php-gd, php-curl, php-mysql, php-ldap, php-zip, php-fileinfo, php-xml, php-soap, php-xmlrpc, php-mbstring, php-json, php-gd, php-mcrypt
       state: latest
 
   - name: Install HTTPD Mariadb-server Memchaced CIFS-Utils etc
