@@ -39,3 +39,24 @@
     yum:
       name: wget, links, httpd, mariadb-server, memcached, cifs-utils, nano
       state: latest
+
+  - name: Start HTTPD
+    service: 
+      name: httpd
+      state: started
+
+  - name: Enable HTTPD
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: Start MariaDB
+    service: 
+      name: mariadb
+      state: started
+
+  - name: Enable MariaDB
+    service:
+      name: mariadb
+      enabled: yes
+
