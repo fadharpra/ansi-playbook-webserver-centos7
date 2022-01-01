@@ -2,6 +2,20 @@
 - name: Install Webserver
   hosts: all
   tasks:
+  - name: Enforcing SELinux
+    selinux:
+      state: disabled
+
+  - name: Disabled Firewalld
+    service:
+      name: firewalld
+      state: stopped
+
+  - name: Enable HTTPD
+    service:
+      name: firewalld
+      enabled: no
+
   - name: Install Repository epel-release
     yum:
       name: epel-release.noarch
@@ -37,5 +51,26 @@
 
   - name: Install HTTPD Mariadb-server Memchaced CIFS-Utils etc
     yum:
-      name: wget, links, httpd, mariadb-server, memcached, cifs-utils, nano
+      name: wget, links, httpd, mariadb-server, memcached, cifs-utils, nano, net-tools
       state: latest
+
+  - name: Start HTTPD
+    service: 
+      name: httpd
+      state: started
+
+  - name: Enable HTTPD
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: Start MariaDB
+    service: 
+      name: mariadb
+      state: started
+
+  - name: Enable MariaDB
+    service:
+      name: mariadb
+      enabled: yes
+
