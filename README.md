@@ -6,10 +6,10 @@ This Playbook works:
 - Stop and disable firewalld
 - Install Repository epel-release yum-utils remi-release
 - Enable repo and install php7.4
-- HTTPD
-- MariaDB-Server
-- memcached
-- wget
-- links
-- cifs-utils
-- nano
+- Install, Start, Enable HTTPD
+- Install, Start, Enable MariaDB-Server
+- Install memcached
+- Install wget
+- Install links
+- Install cifs-utils
+- Install nano
