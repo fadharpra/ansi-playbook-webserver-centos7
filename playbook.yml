@@ -2,7 +2,7 @@
 - name: Install Webserver
   hosts: all
   tasks:
-  - name: Enforcing SELinux
+  - name: Disable SELinux 
     selinux:
       state: disabled
 
@@ -10,11 +10,6 @@
     service:
       name: firewalld
       state: stopped
-
-  - name: Enable HTTPD
-    service:
-      name: firewalld
-      enabled: no
 
   - name: Install Repository epel-release
     yum:
@@ -36,7 +31,7 @@
       name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
       state: latest
 
-  - name: Patching RHEL
+  - name: Patching RHEL7/CentOS7
     yum:
       name: "*"
       state: latest
