@@ -1,6 +1,7 @@
 ---
 - name: Install Webserver
   hosts: all
+  become: true
   tasks:
   - name: Disable SELinux 
     selinux:
@@ -10,11 +11,6 @@
     service:
       name: firewalld
       state: stopped
-
-  - name: Install Repository epel-release
-    yum:
-      name: epel-release.noarch
-      state: latest
 
   - name: Install Repository yum-utils
     yum:
@@ -46,8 +42,27 @@
 
   - name: Install HTTPD Mariadb-server Memchaced CIFS-Utils etc
     yum:
-      name: wget, links, httpd, mariadb-server, memcached, cifs-utils, nano, net-tools
+      name: wget, links, httpd, mariadb-server, memcached, cifs-utils, nano, net-tools, git
       state: latest
+
+  - name: Clone example file index from github
+    shell: 
+      cmd: GIT_SSL_NO_VERIFY=1 git clone https://github.com/fadharpra/template-web-maintenance.git /home/sites/public_html
+
+  - name: Change domain name on index.html
+    shell:
+      cmd: sed -i "s/DOMAIN/$(cat /etc/hostname)/" /home/sites/public_html/index.html
+      warn: false
+
+  - name: Copy webserver configuration file to target host
+    template:
+       src: "files/website.conf"
+       dest: "/etc/httpd/conf.d/website.conf"
+
+  - name: Set Domain in website.conf file
+    shell:
+      cmd: sed -i "s/DOMAIN/$(cat /etc/hostname)/" /etc/httpd/conf.d/website.conf
+      warn: false
 
   - name: Start HTTPD
     service: 
