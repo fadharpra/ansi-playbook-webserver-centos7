@@ -13,3 +13,4 @@ This Playbook works:
 - Install links
 - Install cifs-utils
 - Install nano
+- Automatically create domain in HTTPD virtualhost config using Hostname target
